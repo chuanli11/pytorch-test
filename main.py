@@ -9,8 +9,8 @@ output = {}
 for shape in list_shapes:
     num_warmup = 5
     for i in range(num_warmup):
-        x = torch.randn(4000, 4000)
-        y = torch.randn(4000, 4000)
+        x = torch.randn(shape, shape)
+        y = torch.randn(shape, shape)
         x = x.to("cuda")
         y = y.to("cuda")
         z = torch.matmul(x, y)
@@ -20,8 +20,8 @@ for shape in list_shapes:
     total_start = time.time()
     for i in range(num_sample):
         start = time.time()
-        x = torch.randn(4000, 4000)
-        y = torch.randn(4000, 4000)
+        x = torch.randn(shape, shape)
+        y = torch.randn(shape, shape)
         x = x.to("cuda")
         y = y.to("cuda")
         z = torch.matmul(x, y)
