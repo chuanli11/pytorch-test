@@ -2,12 +2,10 @@ import time
 import torch
 
 list_shapes = [32, 64, 128, 256, 512, 1024, 2048, 4096, 8192]
-
-
-output = {}
+num_warmup = 5
+num_sample = 10
 
 for shape in list_shapes:
-    num_warmup = 5
     for i in range(num_warmup):
         x = torch.randn(shape, shape)
         y = torch.randn(shape, shape)
@@ -16,8 +14,7 @@ for shape in list_shapes:
         z = torch.matmul(x, y)
         torch.cuda.synchronize()
 
-    num_sample = 10
-    total_start = time.time()
+    total_time = 0.0
     for i in range(num_sample):
         start = time.time()
         x = torch.randn(shape, shape)
@@ -27,8 +24,11 @@ for shape in list_shapes:
         z = torch.matmul(x, y)
         torch.cuda.synchronize()
         end = time.time()
-        print((end - start) * 1000)
-    total_end = time.time()
+        ms = (end - start) * 1000
+        print("Inference time: {:.4f} ms".format(ms))
+        total_time += ms
     print(
-        "Total Inference time for {}: {} sec".format(shape, (total_end - total_start))
+        "Average Inference time for {}: {:.4f} ms".format(
+            shape, (total_time) / num_sample
+        )
     )
