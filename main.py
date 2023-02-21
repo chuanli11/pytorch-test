@@ -2,9 +2,10 @@ import time
 import torch
 
 list_shapes = [32, 64, 128, 256, 512, 1024, 2048, 4096]
+# list_shapes = [1024]
 num_warmup = 5
 num_sample = 10
-USE_CUDA = False
+USE_CUDA = True
 
 
 def test_fn(shape, use_cuda):
