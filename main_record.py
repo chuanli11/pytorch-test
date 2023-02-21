@@ -13,6 +13,8 @@ for shape in list_shapes:
     for i in range(num_warmup):
         x = torch.randn(shape, shape)
         y = torch.randn(shape, shape)
+        x = x.to("cuda")
+        y = y.to("cuda")
         z = torch.matmul(x, y)
 
     total_start = time.time()
@@ -24,6 +26,8 @@ for shape in list_shapes:
 
         x = torch.randn(shape, shape)
         y = torch.randn(shape, shape)
+        x = x.to("cuda")
+        y = y.to("cuda")
         z = torch.matmul(x, y)
 
         end.record()
