@@ -23,9 +23,8 @@ for shape in list_shapes:
         result = tensor * tensor
         torch.cuda.synchronize()
         end = time.time()
+        print((end - start) * 1000)
     total_end = time.time()
     print(
-        "Average Inference time for {}: {} sec".format(
-            shape, (total_end - total_start) / num_sample
-        )
+        "Total Inference time for {}: {} sec".format(shape, (total_end - total_start))
     )
