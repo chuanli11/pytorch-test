@@ -16,6 +16,7 @@ for shape in list_shapes:
         x = x.to("cuda")
         y = y.to("cuda")
         z = torch.matmul(x, y)
+        torch.cuda.synchronize()
 
     total_start = time.time()
     for i in range(num_sample):
